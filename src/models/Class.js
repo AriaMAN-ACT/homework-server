@@ -8,10 +8,6 @@ const classSchema = new mongoose.Schema({
     students: {
         type: [mongoose.Schema.ObjectId],
         ref: 'User'
-    },
-    teachers: {
-        type: [mongoose.Schema.ObjectId],
-        ref: 'User'
     }
 });
 
