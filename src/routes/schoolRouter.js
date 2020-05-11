@@ -12,7 +12,7 @@ router
 router
     .route('/:id')
     .get(schoolController.getSchool)
-    .patch(authController.protect, authController.restrictTo('admin', 'manager'), schoolController.updateSchool)
-    .delete(authController.protect, authController.restrictTo('admin', 'manager'), schoolController.deleteSchool);
+    .patch(authController.protect, authController.restrictTo('admin', 'schoolManager'), schoolController.updateSchool)
+    .delete(authController.protect, authController.restrictTo('admin', 'schoolManager'), schoolController.deleteSchool);
 
 module.exports = router;

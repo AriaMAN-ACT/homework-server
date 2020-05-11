@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
     },
     manager: {
         type: mongoose.Schema.ObjectId,
-        default: User.findOne({rote: 'admin'})['_id']
+        default: '5eb93d6dde2514c302c8c8c6'
     }
 });
 
