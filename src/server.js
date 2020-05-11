@@ -9,6 +9,8 @@ process.on('uncaughtException', err => {
 
 dotenv.config({path: path.join(__dirname, 'config.env')});
 
+global.isDev = process.env.NODE_ENV === 'development';
+
 const app = require('./app');
 
 mongoose.connect(process.env.DATABASE, {
@@ -17,12 +19,16 @@ mongoose.connect(process.env.DATABASE, {
     useFindAndModify: false,
     useUnifiedTopology: true
 }).then(con => {
-    console.log('Connected to DB successfully.');
+    if (isDev) {
+        console.log('Connected to DB successfully.');
+    }
 });
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
-    console.log(`App is running in port ${port}`);
+    if (isDev) {
+        console.log(`App is running in port ${port}`);
+    }
 });
 
 process.on('unhandledRejection', err => {

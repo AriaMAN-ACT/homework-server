@@ -11,7 +11,7 @@ app.use(express.json({
     limit: '10kb'
 }));
 
-if (process.env.NODE_ENV === 'development') {
+if (isDev) {
     app.use(morgan('dev'))
 }
 
