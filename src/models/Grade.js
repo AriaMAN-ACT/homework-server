@@ -7,13 +7,11 @@ const gradeSchema = new mongoose.Schema({
     },
     classes: {
         type: [mongoose.Schema.ObjectID],
-        ref: 'Class',
-        required: [true, 'A Grade Must Have At Least One Class']
+        ref: 'Class'
     },
     lessons: {
         type: [mongoose.Schema.ObjectID],
-        ref: 'Lesson',
-        required: [true, 'A Grade Must Have At Least One Lesson']
+        ref: 'Lesson'
     }
 });
 

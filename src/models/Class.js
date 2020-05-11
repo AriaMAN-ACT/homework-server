@@ -7,13 +7,11 @@ const classSchema = new mongoose.Schema({
     },
     students: {
         type: [mongoose.Schema.ObjectID],
-        ref: 'User',
-        required: [true, 'A Class Must Have At Least One Student']
+        ref: 'User'
     },
     teachers: {
         type: [mongoose.Schema.ObjectID],
-        ref: 'User',
-        required: [true, 'A Class Must Have At Least One Teacher']
+        ref: 'User'
     }
 });
 

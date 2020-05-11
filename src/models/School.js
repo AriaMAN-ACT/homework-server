@@ -8,8 +8,7 @@ const schoolSchema = new mongoose.Schema({
     },
     grades: {
         type: [mongoose.Schema.ObjectID],
-        ref: 'Grade',
-        required: [true, 'A School Must Have At Least One Grade']
+        ref: 'Grade'
     }
 });
 
