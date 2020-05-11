@@ -67,11 +67,20 @@ exports.protect = catchError(async (req, res, next) => {
 });
 
 exports.restrictTo = (...rotes) => {
-    return catchError((req, res, next) => {
-            if (!rotes.includes(req.user.role)) {
-                throw new AppError('You don\'t have permission to do that', 403);
+    return catchError(
+        (req, res, next) => {
+            if (rotes.includes(req.user.rote)) {
+                return next();
+            } else if (rotes.includes('selfUser')) {
+                if (req.user.id === req.query.id) {
+                    return next();
+                }
+            } else if (rotes.includes('selfManager')) {
+                if (User.findById(req.query.id).manager === req.user._id) {
+                    return next();
+                }
             }
-            next();
+            throw new AppError('You don\'t have permission to do that', 403);
         }
     );
 };

@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
         maxLength: 100,
         select: false
     },
+    manager: {
+        type: mongoose.Schema.ObjectId,
+        default: User.findOne({rote: 'admin'})['_id']
+    }
 });
 
 userSchema.methods.correctPassword = async function(
