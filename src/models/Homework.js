@@ -16,6 +16,11 @@ const homeworkSchema = new mongoose.Schema({
     sendAfter: {
         type: Boolean,
         default: false
+    },
+    answers: {
+        type: [mongoose.Schema.ObjectId],
+        ref: 'HomeworkAnswer',
+        default: []
     }
 });
 
