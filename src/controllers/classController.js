@@ -1,12 +1,12 @@
 const factory = require('./handlerFactory');
 const Class = require('../models/Class');
 
-exports.getLessons = factory.getAll(Class);
+exports.getClasses = factory.getAll(Class);
 
-exports.createLesson = factory.createOne(Class);
+exports.createClass = factory.createOne(Class);
 
-exports.getLesson = factory.getOne(Class);
+exports.getClass = factory.getOne(Class);
 
-exports.updateLesson = factory.updateOne(Class);
+exports.updateClass = factory.updateOne(Class);
 
-exports.deleteLesson = factory.deleteOne(Class);
+exports.deleteClass = factory.deleteOne(Class);

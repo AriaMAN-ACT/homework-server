@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const classSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'A Grade Must Have a name']
+        required: [true, 'A Class Must Have a name']
     },
     students: {
         type: [mongoose.Schema.ObjectID],
