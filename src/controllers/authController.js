@@ -1,4 +1,4 @@
-const { promisify } = require('util');
+const {promisify} = require('util');
 const jsonWebToken = require('jsonwebtoken');
 
 const User = require('../models/User');
@@ -65,3 +65,13 @@ exports.protect = catchError(async (req, res, next) => {
     req.user = user;
     next();
 });
+
+exports.restrictTo = (...rotes) => {
+    return catchError((req, res, next) => {
+            if (!rotes.includes(req.user.role)) {
+                throw new AppError('You don\'t have permission to do that', 403);
+            }
+            next();
+        }
+    );
+};
