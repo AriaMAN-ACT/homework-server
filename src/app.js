@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const userRouter = require('./routes/userRouter');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/AppError');
 const catchError = require('./utils/catchError');
@@ -20,6 +21,8 @@ app.use((req, res, next) => {
     req.requestAt = date.getTime() - (date.getTimezoneOffset() * -60 * 1000);
     next();
 });
+
+app.use('/api/v1/users', userRouter);
 
 app.all('*', catchError((req, res) => {
     throw new AppError(

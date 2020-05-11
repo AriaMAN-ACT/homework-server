@@ -42,6 +42,7 @@ exports.createOne = Model =>
     catchError(
         async (req, res) => {
             const doc = await Model.create(req.body);
+            doc.password = undefined;
             res.status(201).json({
                 status: 'success',
                 data: {
@@ -93,7 +94,7 @@ exports.getAll = Model =>
                 page: features.queryString.page * 1 || 1,
                 limit: features.queryString.limit * 1 || 20,
                 data: {
-                    tours: docs
+                    docs
                 }
             });
         }
