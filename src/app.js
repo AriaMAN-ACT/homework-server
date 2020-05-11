@@ -7,6 +7,7 @@ const classRouter = require('./routes/classRouter');
 const gradeRouter = require('./routes/gradeRouter');
 const schoolRouter = require('./routes/schoolRouter');
 const homeworkRouter = require('./routes/homeworkRouter');
+const homeworkAnswerRouter = require('./routes/homeworkAnswerRouter');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/AppError');
 const catchError = require('./utils/catchError');
@@ -33,6 +34,7 @@ app.use('/api/v1/classes', classRouter);
 app.use('/api/v1/grades', gradeRouter);
 app.use('/api/v1/schools', schoolRouter);
 app.use('/api/v1/homework', homeworkRouter);
+app.use('/api/v1/homeworkAnswers', homeworkAnswerRouter);
 
 app.all('*', catchError((req) => {
     throw new AppError(
