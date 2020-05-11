@@ -10,11 +10,11 @@ router.route('/signin').post(authController.signIn);
 router
     .route('/')
     .get(userController.getUsers)
-    .post(userController.createUser);
+    .post(authController.protect, authController.restrictTo('admin', 'manager'), userController.createUser);
 router
     .route('/:id')
     .get(userController.getUser)
-    .patch(userController.updateUser)
-    .delete(userController.deleteUser);
+    .patch(authController.protect, authController.restrictTo('admin', 'manager'), userController.updateUser)
+    .delete(authController.protect, authController.restrictTo('admin', 'manager'), userController.deleteUser);
 
 module.exports = router;

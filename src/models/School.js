@@ -7,8 +7,13 @@ const schoolSchema = new mongoose.Schema({
         unique: true
     },
     grades: {
-        type: [mongoose.Schema.ObjectID],
+        type: [mongoose.Schema.ObjectId],
         ref: 'Grade'
+    },
+    manager: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: [true, 'A School Must Have a manager']
     }
 });
 

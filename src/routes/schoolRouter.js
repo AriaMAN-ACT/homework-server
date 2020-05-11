@@ -1,17 +1,18 @@
 const express = require('express');
 
-const SchoolController = require('../controllers/SchoolController');
+const schoolController = require('../controllers/SchoolController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(SchoolController.getSchools)
-    .post(SchoolController.createSchool);
+    .get(schoolController.getSchools)
+    .post(authController.protect, authController.restrictTo('admin', 'manager'), schoolController.createSchool);
 router
     .route('/:id')
-    .get(SchoolController.getSchool)
-    .patch(SchoolController.updateSchool)
-    .delete(SchoolController.deleteSchool);
+    .get(schoolController.getSchool)
+    .patch(authController.protect, authController.restrictTo('admin', 'manager'), schoolController.updateSchool)
+    .delete(authController.protect, authController.restrictTo('admin', 'manager'), schoolController.deleteSchool);
 
 module.exports = router;

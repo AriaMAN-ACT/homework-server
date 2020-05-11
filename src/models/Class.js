@@ -6,11 +6,11 @@ const classSchema = new mongoose.Schema({
         required: [true, 'A Class Must Have a name']
     },
     students: {
-        type: [mongoose.Schema.ObjectID],
+        type: [mongoose.Schema.ObjectId],
         ref: 'User'
     },
     teachers: {
-        type: [mongoose.Schema.ObjectID],
+        type: [mongoose.Schema.ObjectId],
         ref: 'User'
     }
 });

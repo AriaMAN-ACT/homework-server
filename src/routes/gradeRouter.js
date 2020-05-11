@@ -1,17 +1,18 @@
 const express = require('express');
 
-const GradeController = require('../controllers/GradeController');
+const gradeController = require('../controllers/GradeController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(GradeController.getGrades)
-    .post(GradeController.createGrade);
+    .get(gradeController.getGrades)
+    .post(authController.protect, authController.restrictTo('admin', 'manager'), gradeController.createGrade);
 router
     .route('/:id')
-    .get(GradeController.getGrade)
-    .patch(GradeController.updateGrade)
-    .delete(GradeController.deleteGrade);
+    .get(gradeController.getGrade)
+    .patch(authController.protect, authController.restrictTo('admin', 'manager'), gradeController.updateGrade)
+    .delete(authController.protect, authController.restrictTo('admin', 'manager'), gradeController.deleteGrade);
 
 module.exports = router;

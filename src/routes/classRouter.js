@@ -1,17 +1,18 @@
 const express = require('express');
 
 const classController = require('../controllers/classController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
 router
     .route('/')
     .get(classController.getClasses)
-    .post(classController.createClass);
+    .post(authController.protect, authController.restrictTo('admin', 'manager'), classController.createClass);
 router
     .route('/:id')
     .get(classController.getClass)
-    .patch(classController.updateClass)
-    .delete(classController.deleteClass);
+    .patch(authController.protect, authController.restrictTo('admin', 'manager'), classController.updateClass)
+    .delete(authController.protect, authController.restrictTo('admin', 'manager'), classController.deleteClass);
 
 module.exports = router;

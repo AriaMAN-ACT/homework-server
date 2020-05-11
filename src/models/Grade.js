@@ -6,11 +6,11 @@ const gradeSchema = new mongoose.Schema({
         required: [true, 'A Grade Must Have a name']
     },
     classes: {
-        type: [mongoose.Schema.ObjectID],
+        type: [mongoose.Schema.ObjectId],
         ref: 'Class'
     },
     lessons: {
-        type: [mongoose.Schema.ObjectID],
+        type: [mongoose.Schema.ObjectId],
         ref: 'Lesson'
     }
 });
