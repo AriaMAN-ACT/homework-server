@@ -17,11 +17,6 @@ const homeworkSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    answers: {
-        type: [mongoose.Schema.ObjectId],
-        ref: 'HomeworkAnswer',
-        default: []
-    },
     teacher: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',

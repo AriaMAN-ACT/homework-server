@@ -8,11 +8,11 @@ const router = express.Router();
 router
     .route('/')
     .get(homeworkAnswerController.getHomeworkAnswers)
-    .post(authController.protect, authController.restrictTo('admin', 'manager'), homeworkAnswerController.createHomeworkAnswer);
+    .post(authController.protect, authController.restrictTo('admin', 'student'), homeworkAnswerController.createHomeworkAnswer);
 router
     .route('/:id')
     .get(homeworkAnswerController.getHomeworkAnswer)
-    .patch(authController.protect, authController.restrictTo('admin', 'manager'), homeworkAnswerController.updateHomeworkAnswer)
-    .delete(authController.protect, authController.restrictTo('admin', 'manager'), homeworkAnswerController.deleteHomeworkAnswer);
+    .patch(authController.protect, authController.restrictTo('admin', 'selfStudent'), homeworkAnswerController.updateHomeworkAnswer)
+    .delete(authController.protect, authController.restrictTo('admin', 'selfStudent'), homeworkAnswerController.deleteHomeworkAnswer);
 
 module.exports = router;
