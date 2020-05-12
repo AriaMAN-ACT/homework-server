@@ -72,7 +72,7 @@ exports.protect = catchError(async (req, res, next) => {
     next();
 });
 
-exports.restrictTo = async (...rotes) => {
+exports.restrictTo = (...rotes) => {
     return catchError(
         async (req, res, next) => {
             if (rotes.includes(req.user.rote)) {

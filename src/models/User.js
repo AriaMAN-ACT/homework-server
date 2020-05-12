@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
     },
     manager: {
         type: mongoose.Schema.ObjectId,
-        default: '5eb93d6dde2514c302c8c8c6'
+        default: '5eba5ef968e3a5987df846a6'
     }
 });
 
@@ -44,6 +44,9 @@ userSchema.pre('save', async function(next) {
     }
     this.password = await bcrypt.hash(this.password, 12);
     next();
+});
+
+userSchema.pre('save', async function(next) {
 });
 
 const User = mongoose.model('User', userSchema);
