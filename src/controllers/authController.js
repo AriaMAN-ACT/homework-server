@@ -3,6 +3,7 @@ const jsonWebToken = require('jsonwebtoken');
 
 const User = require('../models/User');
 const School = require('../models/School');
+const Grade = require('../models/Grade');
 const catchError = require('../utils/catchError');
 const AppError = require('../utils/AppError');
 
@@ -67,9 +68,9 @@ exports.protect = catchError(async (req, res, next) => {
     next();
 });
 
-exports.restrictTo = (...rotes) => {
+exports.restrictTo = async (...rotes) => {
     return catchError(
-        (req, res, next) => {
+        async (req, res, next) => {
             if (rotes.includes(req.user.rote)) {
                 return next();
             } else if (rotes.includes('selfUser')) {
@@ -77,11 +78,15 @@ exports.restrictTo = (...rotes) => {
                     return next();
                 }
             } else if (rotes.includes('selfManager')) {
-                if (User.findById(req.query.id).manager === req.user._id) {
+                if ((await User.findById(req.query.id) || {}).manager === req.user._id) {
                     return next();
                 }
             } else if (rotes.includes('schoolManager')) {
-                if (School.findById(req.query.id).manager === req.user._id) {
+                if ((await School.findById(req.query.id) || {}).manager === req.user._id) {
+                    return next();
+                }
+            } else if (rotes.includes('gradeManager')) {
+                if ((await Grade.findById(req.query.id) || {}).manager === req.user._id) {
                     return next();
                 }
             }

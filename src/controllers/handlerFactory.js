@@ -41,7 +41,7 @@ exports.updateOne = Model =>
 exports.createOne = Model =>
     catchError(
         async (req, res) => {
-            const doc = await Model.create(req.body);
+            const doc = await Model.create({...req.body, manager: req.user._id});
             doc.password = undefined;
             res.status(201).json({
                 status: 'success',
