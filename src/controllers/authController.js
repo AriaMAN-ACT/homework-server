@@ -4,6 +4,7 @@ const jsonWebToken = require('jsonwebtoken');
 const User = require('../models/User');
 const School = require('../models/School');
 const Grade = require('../models/Grade');
+const Class = require('../models/Class');
 const catchError = require('../utils/catchError');
 const AppError = require('../utils/AppError');
 
@@ -87,6 +88,10 @@ exports.restrictTo = async (...rotes) => {
                 }
             } else if (rotes.includes('gradeManager')) {
                 if ((await Grade.findById(req.query.id) || {}).manager === req.user._id) {
+                    return next();
+                }
+            } else if (rotes.includes('classManager')) {
+                if ((await Class.findById(req.query.id) || {}).manager === req.user._id) {
                     return next();
                 }
             }

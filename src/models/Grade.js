@@ -9,10 +9,6 @@ const gradeSchema = new mongoose.Schema({
         type: [mongoose.Schema.ObjectId],
         ref: 'Class'
     },
-    lessons: {
-        type: [mongoose.Schema.ObjectId],
-        ref: 'Lesson'
-    },
     manager: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
