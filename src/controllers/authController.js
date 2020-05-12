@@ -6,6 +6,7 @@ const School = require('../models/School');
 const Grade = require('../models/Grade');
 const Class = require('../models/Class');
 const Lesson = require('../models/Lesson');
+const Homework = require('../models/Homework');
 const catchError = require('../utils/catchError');
 const AppError = require('../utils/AppError');
 
@@ -97,6 +98,10 @@ exports.restrictTo = async (...rotes) => {
                 }
             } else if (rotes.includes('lessonManager')) {
                 if ((await Lesson.findById(req.query.id) || {}).manager === req.user._id) {
+                    return next();
+                }
+            } else if (rotes.includes('selfTeacher')) {
+                if ((await Homework.findById(req.query.id) || {}).teacher === req.user._id) {
                     return next();
                 }
             }
