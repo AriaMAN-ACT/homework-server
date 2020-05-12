@@ -12,6 +12,11 @@ const lessonSchema = new mongoose.Schema({
     homework: {
         type: [mongoose.Schema.ObjectId],
         ref: 'Homework'
+    },
+    manager: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: [true, 'A School Must Have a manager']
     }
 });
 
