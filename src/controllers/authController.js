@@ -44,6 +44,7 @@ exports.signIn = catchError(async (req, res) => {
         throw new AppError('request body should have valid email and password.', 400);
     }
     const user = await User.findOne({username}).select('+password');
+    console.log(user);
 
     if (!user || !(await user.correctPassword(password, user.password))) {
         throw new AppError('Incorrect username or password', 401);
