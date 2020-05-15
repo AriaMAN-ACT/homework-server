@@ -79,35 +79,35 @@ exports.restrictTo = (...rotes) => {
             if (rotes.includes(req.user.rote)) {
                 return next();
             } else if (rotes.includes('selfUser')) {
-                if (req.user.id === req.query.id) {
+                if (req.user.id === req.params.id) {
                     return next();
                 }
             } else if (rotes.includes('selfManager')) {
-                if ((await User.findById(req.query.id) || {}).manager === req.user._id) {
+                if ((await User.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
             } else if (rotes.includes('schoolManager')) {
-                if ((await School.findById(req.query.id) || {}).manager === req.user._id) {
+                if ((await School.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
             } else if (rotes.includes('gradeManager')) {
-                if ((await Grade.findById(req.query.id) || {}).manager === req.user._id) {
+                if ((await Grade.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
             } else if (rotes.includes('classManager')) {
-                if ((await Class.findById(req.query.id) || {}).manager === req.user._id) {
+                if ((await Class.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
             } else if (rotes.includes('lessonManager')) {
-                if ((await Lesson.findById(req.query.id) || {}).manager === req.user._id) {
+                if ((await Lesson.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
             } else if (rotes.includes('selfTeacher')) {
-                if ((await Homework.findById(req.query.id) || {}).teacher === req.user._id) {
+                if ((await Homework.findById(req.params.id) || {}).teacher.toString() === req.user._id.toString()) {
                     return next();
                 }
             } else if (rotes.includes('selfStudent')) {
-                if ((await HomeworkAnswer.findById(req.query.id) || {}).manager === req.user._id) {
+                if ((await HomeworkAnswer.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
             }
