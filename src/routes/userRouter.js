@@ -10,7 +10,7 @@ router.route('/signin').post(authController.signIn);
 router
     .route('/')
     .get(userController.getUsers)
-    .post(authController.protect, authController.restrictTo('admin', 'manager'), userController.createUser);
+    .post(authController.protect, authController.restrictTo('admin', 'school-manager'), userController.createUser);
 router
     .route('/:id')
     .get(userController.getUser)

@@ -8,7 +8,7 @@ const router = express.Router();
 router
     .route('/')
     .get(gradeController.getGrades)
-    .post(authController.protect, authController.restrictTo('admin', 'manager'), gradeController.createGrade);
+    .post(authController.protect, authController.restrictTo('admin', 'school-manager'), gradeController.createGrade);
 router
     .route('/:id')
     .get(gradeController.getGrade)
