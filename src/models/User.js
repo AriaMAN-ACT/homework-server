@@ -46,11 +46,8 @@ userSchema.pre('save', async function(next) {
     next();
 });
 
-userSchema.pre('update', async function(next) {
-    if (!this.isModified('password')) {
-        return next();
-    }
-    this.password = await bcrypt.hash(this.password, 12);
+userSchema.pre('findOneAndUpdate', async function(next) {
+        this._update.password = await bcrypt.hash(this._update.password, 12);
     next();
 });
 

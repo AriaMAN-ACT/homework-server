@@ -78,35 +78,43 @@ exports.restrictTo = (...rotes) => {
         async (req, res, next) => {
             if (rotes.includes(req.user.rote)) {
                 return next();
-            } else if (rotes.includes('selfUser')) {
+            }
+            if (rotes.includes('selfUser')) {
                 if (req.user.id === req.params.id) {
                     return next();
                 }
-            } else if (rotes.includes('selfManager')) {
+            }
+            if (rotes.includes('selfManager')) {
                 if ((await User.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
-            } else if (rotes.includes('schoolManager')) {
+            }
+            if (rotes.includes('schoolManager')) {
                 if ((await School.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
-            } else if (rotes.includes('gradeManager')) {
+            }
+            if (rotes.includes('gradeManager')) {
                 if ((await Grade.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
-            } else if (rotes.includes('classManager')) {
+            }
+            if (rotes.includes('classManager')) {
                 if ((await Class.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
-            } else if (rotes.includes('lessonManager')) {
+            }
+            if (rotes.includes('lessonManager')) {
                 if ((await Lesson.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
-            } else if (rotes.includes('selfTeacher')) {
+            }
+            if (rotes.includes('selfTeacher')) {
                 if ((await Homework.findById(req.params.id) || {}).teacher.toString() === req.user._id.toString()) {
                     return next();
                 }
-            } else if (rotes.includes('selfStudent')) {
+            }
+            if (rotes.includes('selfStudent')) {
                 if ((await HomeworkAnswer.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
                     return next();
                 }
