@@ -69,6 +69,7 @@ exports.protect = catchError(async (req, res, next) => {
         );
     }
     req.user = user;
+    req.body.requestAt = req.requestAt;
     next();
 });
 

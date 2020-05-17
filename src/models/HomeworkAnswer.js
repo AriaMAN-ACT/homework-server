@@ -13,6 +13,9 @@ const homeworkAnswersSchema = new mongoose.Schema({
     homework: {
         type: mongoose.Schema.ObjectId,
         ref: 'Homework'
+    },
+    requestAt: {
+        type: Number
     }
 });
 
