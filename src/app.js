@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 
 const userRouter = require('./routes/userRouter');
 const lessonRouter = require('./routes/lessonRouter');
@@ -21,9 +23,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.json({
-    limit: '10kb'
+app.use(fileUpload({
+    createParentPath: true
 }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 if (isDev) {
     app.use(morgan('dev'))
@@ -31,7 +36,7 @@ if (isDev) {
 
 app.use((req, res, next) => {
     const date = new Date();
-    req.requestAt = date.getTime() - (date.getTimezoneOffset() * -60 * 1000);
+    req.requestAt = date.getTime() + (date.getTimezoneOffset() * 60 * 1000);
     next();
 });
 

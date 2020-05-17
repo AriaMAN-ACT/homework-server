@@ -44,7 +44,6 @@ exports.signIn = catchError(async (req, res) => {
         throw new AppError('request body should have valid email and password.', 400);
     }
     const user = await User.findOne({username}).select('+password');
-    console.log(user);
 
     if (!user || !(await user.correctPassword(password, user.password))) {
         throw new AppError('Incorrect username or password', 401);
@@ -115,7 +114,7 @@ exports.restrictTo = (...rotes) => {
                 }
             }
             if (rotes.includes('selfStudent')) {
-                if ((await HomeworkAnswer.findById(req.params.id) || {}).manager.toString() === req.user._id.toString()) {
+                if (((await HomeworkAnswer.findById(req.params.id) || {}).manager || '').toString() === req.user._id.toString()) {
                     return next();
                 }
             }
