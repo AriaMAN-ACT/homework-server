@@ -48,6 +48,8 @@ app.use('/api/v1/schools', schoolRouter);
 app.use('/api/v1/homework', homeworkRouter);
 app.use('/api/v1/homeworkAnswers', homeworkAnswerRouter);
 
+app.use('/api/v1/download/homeworkAnswers', express.static('uploads'));
+
 app.all('*', catchError((req) => {
     throw new AppError(
         `Can\'t find ${req.originalUrl} on this server.`,
